@@ -2,18 +2,18 @@ import time
 import logging
 from pyrogram import Client, filters, enums
 from config import session_string, allowed_groups, owner_id, extract_links
-from downloader import check_url_patterns_async, fetch_download_link_async, get_formatted_size_async
+from downloader import check_url_patterns_async, fetch_download_link_async, get_formatted_size_async, my_headers
 
+API_ID = "19748984"  # Replace with your API_ID from config.py
+API_HASH = "2141e30f96dfbd8c46fbb5ff4b197004"  # Replace with your API_HASH from config.py
+BOT_TOKEN = "6399306217:AAFpGkkyZSOZoQJuMg5bR6AV4P-OmbFs1a4"  # Replace with your BOT_TOKEN from config.py
 
-API_ID = "19748984" #config("API_ID", default=None, cast=int)
-API_HASH = "2141e30f96dfbd8c46fbb5ff4b197004" #config("API_HASH", default=None)
-BOT_TOKEN = "6399306217:AAFpGkkyZSOZoQJuMg5bR6AV4P-OmbFs1a4" 
 app = Client(
-    "SaveRestricted",
+    session_string,
     bot_token=BOT_TOKEN,
     api_id=int(API_ID),
     api_hash=API_HASH
-)  
+)
 
 logging.basicConfig(level=logging.INFO)
 
