@@ -1,9 +1,6 @@
 import os
 import logging
 import re
-from dotenv import load_dotenv
-
-load_dotenv()
 
 logger = logging.getLogger(__name__)
 
@@ -29,9 +26,9 @@ my_headers = {
     "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Mobile Safari/537.36"
 }
 
-session_string = os.environ.get("session_string")
-allowed_groups = os.environ.get("allowed_groups") or "-123232ZCVZB"  # added random group id to avoid NoneType error
-owner_id = os.environ.get("owner_id") or ""
+session_string = "BQGUFZYAIcLZ8Gj0jmkiAHriyZ0m2veFedkze8TuOxyqWD149UJjqqBDJ6oWY-5jdfcfD-ze2D5mophOlp4LFbBYqjfJQvh_zxgPUzcfnerzSOfA1u_OcVUrPnml5xLdlavnucEPkWkiR9NBCl7pO2M1n03KBv0HfOHX4eNI2HjtypejWDx-OiTDqBHLY2xJAtjUxb01SxT58zg9zH--gPokXM3lfA-MaNms53ycjMjIIg3GtFFhhAM7ewQBMIdUm-D4mzf8vxEiqWhvd_Z4CmSrn1x7YR2tZ3GVjfyTg-Cqg4hZHJ_DpddYokjxtszvPC91YcibkggmxhceiRycV9UCciJuKAAAAAGSL3BcAA"
+allowed_groups = "-123232ZCVZB"  # added random group id to avoid NoneType error
+owner_id = "6747549788"
 
 try:
     allowed_groups = eval(allowed_groups)
