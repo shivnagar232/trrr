@@ -4,7 +4,17 @@ from pyrogram import Client, filters, enums
 from config import session_string, allowed_groups, owner_id, extract_links
 from downloader import check_url_patterns_async, fetch_download_link_async, get_formatted_size_async
 
-app = Client("teraBox", session_string=session_string)
+
+API_ID = "19748984" #config("API_ID", default=None, cast=int)
+API_HASH = "2141e30f96dfbd8c46fbb5ff4b197004" #config("API_HASH", default=None)
+BOT_TOKEN = "7139415053:AAE_bP2d7TmCfcAororxaQ2xhAel2l-h9S0" #config("BOT_TOKEN", default=None)
+app = Client(
+    "SaveRestricted",
+    bot_token=BOT_TOKEN,
+    api_id=int(API_ID),
+    api_hash=API_HASH
+)  
+
 logging.basicConfig(level=logging.INFO)
 
 
