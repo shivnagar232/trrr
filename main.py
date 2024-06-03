@@ -19,24 +19,26 @@ app = Client(
 
 logging.basicConfig(level=logging.INFO)
 
-async def download_with_aria2c(download_link):
+async def download_with_ytdlp(download_link, user_id):
     try:
         current_time = int(time.time())
-        output_filename = f"@devggn_{current_time}"
-        download_process = subprocess.Popen(['aria2c', '-x', '16', '-s', '16', '-o', output_filename, download_link], stdout=subprocess.PIPE)
+        user_id = message.chat.id
+        output_filename = f"terabox - {user_id}"
+        
+        # Command to download using yt-dlp with a specific output filename
+        download_process = subprocess.Popen(['yt-dlp', '--output', output_filename, download_link], stdout=subprocess.PIPE)
         stdout, stderr = download_process.communicate()
+        
         if download_process.returncode == 0:
-            # Assuming file is downloaded to current directory
             downloaded_file = os.path.join(os.getcwd(), output_filename)
             return downloaded_file
         else:
-            logging.error(f"aria2c process returned non-zero exit code: {download_process.returncode}")
+            logging.error(f"yt-dlp process returned non-zero exit code: {download_process.returncode}")
             return None
     except Exception as e:
-        logging.error(f"Error in downloading with aria2c: {e}")
+        logging.error(f"Error in downloading with yt-dlp: {e}")
         return None
 
-# Function to send document back to user
 async def send_document_to_user(chat_id, file_path, caption):
     try:
         await app.send_document(chat_id, file_path, caption=caption)
@@ -110,13 +112,15 @@ async def link_handler(client, message):
                 )
                 await process_url.edit_text(download_message)
 
-                # Example using aria2c for download
+                # Downloading with yt-dlp and sending document
                 if link_data:
                     download_link = link_data[0]["dlink"]  # Assuming first link in list
-                    downloaded_file = await download_with_aria2c(download_link)
+                    downloaded_file = await download_with_ytdlp(download_link, message.chat.id)
                     if downloaded_file:
                         caption = "Downloaded file"
                         await send_document_to_user(message.chat.id, downloaded_file, caption)
+                        # Remove downloaded file after sending
+                        os.remove(downloaded_file)
                     else:
                         await client.send_message(message.chat.id, "Failed to download.")
 
