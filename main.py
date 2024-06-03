@@ -24,12 +24,12 @@ logging.basicConfig(level=logging.INFO)
 async def start(client, message):
     if message.chat.type.value != "private" and str(message.chat.id) not in allowed_groups:
         await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
-        await message.reply_text("⚠️ Forbidden!\nFor groups access.\nContact @DTMK_C", quote=True)
+        await message.reply_text("⚠️ Forbidden!\nFor groups access.\nContact @devggn", quote=True)
         return
     else:
         await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
         await message.reply_text(
-            "Tesssssssssst\n"
+            "Hello! I'm Terabox link Bypass Bot. Send me a link to bypass.\n"
             "Owner: @devggn\n"
             "Eg:- `https://teraboxapp.com/s/1Ykohv-bhT4SJJEgyDMeS-A`", quote=True)
 
@@ -47,10 +47,15 @@ async def ping(client, message):
 
 
 async def format_message(link_data):
-    file_name = link_data["server_filename"]
-    file_size = await get_formatted_size_async(link_data["size"])
-    download_link = link_data["dlink"]
-    return file_name, file_size, download_link
+    formatted_messages = []
+    for link in link_data:
+        file_name = link["server_filename"]
+        file_size = await get_formatted_size_async(link["size"])
+        download_link = link["dlink"]
+        formatted_messages.append(
+            f"┎ <b>Title</b>: `{file_name}`\n┠ <b>Size</b>: `{file_size}`\n┖ <b>Link</b>: <a href={download_link}>Link</a>"
+        )
+    return formatted_messages
 
 
 async def download_file(download_link):
@@ -90,28 +95,21 @@ async def link_handler(client, message):
                 process_url = await message.reply_text("🔎 Processing URL...", quote=True)
                 link_data = await fetch_download_link_async(url)
 
-                # Extract necessary data from link_data
-                file_name, file_size, download_link = await format_message(link_data)
+                # Ensure link_data is a list of dictionaries, each representing a download link
+                if not isinstance(link_data, list):
+                    raise Exception("Unexpected data format received from fetch_download_link_async")
 
-                # Perform server-side download
-                downloaded_file = await download_file(download_link)
+                # Format messages for each link_data entry
+                formatted_messages = await format_message(link_data)
 
-                # Upload the downloaded file to Telegram
-                await client.send_chat_action(message.chat.id, enums.ChatAction.UPLOAD_DOCUMENT)
-                await client.send_document(
-                    chat_id=message.chat.id,
-                    document=downloaded_file,
-                    caption=f"🔗 <b>Link Bypassed!</b>\n\n┎ <b>Title</b>: `{file_name}`\n┠ <b>Size</b>: `{file_size}`",
-                    parse_mode='html'
-                )
-
-                # Clean up downloaded file
-                os.remove(downloaded_file)
+                # Send formatted messages
+                for formatted_message in formatted_messages:
+                    await client.send_message(message.chat.id, formatted_message, parse_mode='html')
 
                 end_time = time.time()
                 time_taken = end_time - start_time
                 download_message = (
-                    f"🔗 <b>Link Bypassed!</b>\n\n┎ <b>Title</b>: `{file_name}`\n┠ <b>Size</b>: `{file_size}`\n┖ <b>Time Taken</b>: {time_taken:.2f} seconds"
+                    f"🔗 <b>Links Bypassed!</b>\n\n<b>Time Taken</b>: {time_taken:.2f} seconds"
                 )
                 await process_url.edit_text(download_message)
 
