@@ -23,7 +23,7 @@ async def download_with_aria2c(download_link):
     try:
         current_time = int(time.time())
         output_filename = f"@devggn_{current_time}"
-        download_process = subprocess.Popen([aria2c, '-x', '16', '-s', '16', '-o', output_filename, download_link], stdout=subprocess.PIPE)
+        download_process = subprocess.Popen(['aria2c', '-x', '16', '-s', '16', '-o', output_filename, download_link], stdout=subprocess.PIPE)
         stdout, stderr = download_process.communicate()
         if download_process.returncode == 0:
             # Assuming file is downloaded to current directory
