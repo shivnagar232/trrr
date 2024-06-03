@@ -57,13 +57,13 @@ async def send_document_to_user(chat_id, file_path, caption):
 async def start(client, message):
     if message.chat.type.value != "private" and str(message.chat.id) not in allowed_groups:
         await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
-        await message.reply_text("⚠️ Forbidden!\nFor groups access.\nContact @DTMK_C", quote=True)
+        await message.reply_text("⚠️ Forbidden!\nFor groups access.\nContact @devggn", quote=True)
         return
     else:
         await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
         await message.reply_text(
             "Hello! I'm Terabox link Bypass Bot. Send me a link to bypass.\n"
-            "Owner: @DTMK_C\n"
+            "Owner: @devggn\n"
             "Eg:- `https://teraboxapp.com/s/1Ykohv-bhT4SJJEgyDMeS-A`", quote=True)
 
 @app.on_message(filters.command("ping"))
@@ -88,7 +88,7 @@ async def format_message(link_data):
 async def link_handler(client, message):
     if message.chat.type.value != "private" and str(message.chat.id) not in allowed_groups:
         await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
-        await message.reply_text("⚠️ Forbidden! For groups access.\nContact @DTMK_C", quote=True)
+        await message.reply_text("⚠️ Forbidden! For groups access.\nContact @devggn", quote=True)
         return
     else:
         start_time = time.time()
