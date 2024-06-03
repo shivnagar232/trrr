@@ -28,8 +28,7 @@ async def start(client, message):
     else:
         await client.send_chat_action(message.chat.id, enums.ChatAction.TYPING)
         await message.reply_text(
-            "Hello! I'm Terabox link Bypass Bot. Send me a link to bypass.\n"
-            "Owner: @DTMK_C\n"
+            "Hello! I am testing... being test by Team SPY, send Terabox link\n"
             "Eg:- `https://teraboxapp.com/s/1Ykohv-bhT4SJJEgyDMeS-A`", quote=True)
 
 
