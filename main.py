@@ -10,7 +10,7 @@ API_HASH = "2141e30f96dfbd8c46fbb5ff4b197004"  # Replace with your API_HASH from
 BOT_TOKEN = "6399306217:AAFpGkkyZSOZoQJuMg5bR6AV4P-OmbFs1a4"  # Replace with your BOT_TOKEN from config.py
 
 app = Client(
-    session_string,
+    name="ggn",
     bot_token=BOT_TOKEN,
     api_id=int(API_ID),
     api_hash=API_HASH
