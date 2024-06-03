@@ -87,7 +87,7 @@ async def link_handler(client, message):
                         file_size = await get_formatted_size_async(link["size"])
 
                         # Download the file
-                        async with client.download(download_link, file_name=file_name) as file_path:
+                        async with client.download_media(download_link, file_name=file_name) as file_path:
                             # Upload the downloaded file
                             await client.send_document(message.chat.id, file_path, caption=f"🔗 <b>Fukkkked TeraBox!</b>\n\n"
                                                                                               f"┎ <b>Title</b>: `{file_name}`\n"
