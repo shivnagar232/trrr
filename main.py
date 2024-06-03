@@ -89,12 +89,13 @@ async def link_handler(client, message):
                         # Download the file
                         async with client.download(download_link, file_name=file_name) as file_path:
                             # Upload the downloaded file
-                            await client.send_document(message.chat.id, file_path, caption=f"🔗 <b>Link Bypassed!</b>\n\n"
+                            await client.send_document(message.chat.id, file_path, caption=f"🔗 <b>Fukkkked TeraBox!</b>\n\n"
                                                                                               f"┎ <b>Title</b>: `{file_name}`\n"
                                                                                               f"┠ <b>Size</b>: `{file_size}`\n"
-                                                                                              f"┖ <b>Link</b>: <a href={download_link}>Link</a>")
+                                                                                              f"┖ <b>Link</b>: <a href={download_link}>Link</a>\n\n"
+                                                                                              f"Powered by __**Team SPY**__")
 
-                download_message = f"🔗 <b>Link Bypassed!</b>\n\n<b>Time Taken</b>: {time_taken:.2f} seconds"
+                download_message = f"🔗 <b>Mil gya pom pom enjoy!</b>\n\n<b>Time Taken</b>: {time_taken:.2f} seconds"
                 await process_url.edit_text(download_message)
 
         except Exception as e:
