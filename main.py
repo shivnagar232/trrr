@@ -41,7 +41,7 @@ async def download_with_ytdlp(download_link, user_id):
 
 async def send_document_to_user(chat_id, file_path, caption):
     try:
-        await app.send_document(chat_id, file_path, caption=caption)
+        await app.send_video(chat_id, file_path, caption=caption)
         return True
     except Exception as e:
         logging.error(f"Error in sending document to user: {e}")
