@@ -19,11 +19,10 @@ app = Client(
 
 logging.basicConfig(level=logging.INFO)
 
-async def download_with_ytdlp(download_link, user_id):
+async def download_with_ytdlp(download_link, user_id, message):
     try:
         current_time = int(time.time())
-        user_id = message.chat.id
-        output_filename = f"terabox - {user_id}"
+        output_filename = f"terabox - {user_id}_{current_time}"
         
         # Command to download using yt-dlp with a specific output filename
         download_process = subprocess.Popen(['yt-dlp', '--output', output_filename, download_link], stdout=subprocess.PIPE)
@@ -116,12 +115,13 @@ async def link_handler(client, message):
                 if link_data:
                     download_link = link_data[0]["dlink"]  # Assuming first link in list
                     dl = await message.reply_text("Dowloading...", quote=True)
-                    downloaded_file = await download_with_ytdlp(download_link, message.chat.id)
+                    downloaded_file = await download_with_ytdlp(download_link, message.chat.id, message)
                     up = (f"Uploading...")
-                    await dl.edit_text(download_message)
+                    await dl.edit_text(up)
                     if downloaded_file:
                         caption = "Downloaded file"
                         await send_document_to_user(message.chat.id, downloaded_file, caption)
+                        await dl.delete()
                         # Remove downloaded file after sending
                         os.remove(downloaded_file)
                     else:
