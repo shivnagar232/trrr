@@ -3,9 +3,8 @@ import re
 import aiohttp
 from config import my_cookie, my_headers
 
-# set the environment vars for headers and cookies
-my_session = aiohttp.ClientSession(cookies=my_cookie)
-my_session.headers.update(my_headers)
+# Initialize a session with the provided cookies and headers
+my_session = aiohttp.ClientSession(cookies=my_cookie, headers=my_headers)
 
 async def get_formatted_size_async(size_bytes):
     try:
