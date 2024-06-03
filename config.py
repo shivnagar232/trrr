@@ -10,7 +10,7 @@ my_headers = {
     "Accept-Language": "en-US,en;q=0.9,hi-IN;q=0.8,hi;q=0.7",
     "Connection": "keep-alive",
     "Content-Length": "0",
-    "Cookie": ,
+    "Cookie": my_cookie,
     "Dnt": "1",
     "Host": "www.terabox.com",
     "Origin": "https://www.terabox.com",
