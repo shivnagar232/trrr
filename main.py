@@ -115,7 +115,10 @@ async def link_handler(client, message):
                 # Downloading with yt-dlp and sending document
                 if link_data:
                     download_link = link_data[0]["dlink"]  # Assuming first link in list
+                    dl = await message.reply_text("Dowloading...", quote=True)
                     downloaded_file = await download_with_ytdlp(download_link, message.chat.id)
+                    up = (f"Uploading...")
+                    await dl.edit_text(download_message)
                     if downloaded_file:
                         caption = "Downloaded file"
                         await send_document_to_user(message.chat.id, downloaded_file, caption)
