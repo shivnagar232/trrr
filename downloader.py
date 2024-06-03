@@ -1,12 +1,9 @@
 import asyncio
 import re
 import aiohttp
-from config import my_cookie_str, my_headers
+from config import my_cookie, my_headers
 
-# Evaluate cookie string to dictionary
-my_cookie = dict(item.split("=") for item in my_cookie_str.split(";"))
-
-# Set up ClientSession with cookies and headers
+# set the environment vars for headers and cookies
 my_session = aiohttp.ClientSession(cookies=my_cookie)
 my_session.headers.update(my_headers)
 
