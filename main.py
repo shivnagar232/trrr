@@ -7,7 +7,7 @@ from downloader import check_url_patterns_async, fetch_download_link_async, get_
 
 API_ID = "19748984" #config("API_ID", default=None, cast=int)
 API_HASH = "2141e30f96dfbd8c46fbb5ff4b197004" #config("API_HASH", default=None)
-BOT_TOKEN = "7139415053:AAE_bP2d7TmCfcAororxaQ2xhAel2l-h9S0" #config("BOT_TOKEN", default=None)
+BOT_TOKEN = "6399306217:AAFpGkkyZSOZoQJuMg5bR6AV4P-OmbFs1a4" 
 app = Client(
     "SaveRestricted",
     bot_token=BOT_TOKEN,
